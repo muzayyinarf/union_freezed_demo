@@ -1,15 +1,14 @@
 import 'dart:math';
-
-import 'package:union_freezed_demo/result.dart';
+import 'fresult.dart';
 
 class NumberRepository {
-  Result getNumber() {
+  FResult getNumber() {
     //return method diubah agar tipe data bisa banyak (union)
     Random random = Random();
     if (random.nextBool()) {
-      return Result.success(random.nextInt(100));
+      return FResult.success(random.nextInt(100));
     } else {
-      return Result.failed('Getting number failed');
+      return const FResult.failed('Getting number failed');
     }
   }
 }

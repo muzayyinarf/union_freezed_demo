@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:union_freezed_demo/result.dart';
 import '/number_repository.dart';
+import 'fresult.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({Key? key}) : super(key: key);
@@ -10,8 +10,8 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
-  Result result =
-      Result.success(0); //tipe data int diganti agar bisa diubah tipe datanya
+  //tipe data int diganti agar bisa diubah tipe datanya
+  FResult result = const FResult.success(0);
 
   @override
   Widget build(BuildContext context) {
@@ -24,9 +24,11 @@ class _MainPageState extends State<MainPage> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
-            result is Success
-                ? '${(result as Success).number}'
-                : (result as Failed).message,
+            // result.when(
+            //     success: (number) => '$number', failed: (message) => message),
+            result.map(
+                success: (value) => '${value.number}',
+                failed: (value) => value.message),
             style: const TextStyle(fontSize: 40),
           ),
           const SizedBox(
