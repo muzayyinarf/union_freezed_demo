@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:union_freezed_demo/result.dart';
 import '/number_repository.dart';
 
 class MainPage extends StatefulWidget {
@@ -9,7 +10,8 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
-  int? number;
+  Result result =
+      Result.success(0); //tipe data int diganti agar bisa diubah tipe datanya
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +24,9 @@ class _MainPageState extends State<MainPage> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
-            '$number',
+            result is Success
+                ? '${(result as Success).number}'
+                : (result as Failed).message,
             style: const TextStyle(fontSize: 40),
           ),
           const SizedBox(
@@ -31,7 +35,7 @@ class _MainPageState extends State<MainPage> {
           ElevatedButton(
               onPressed: () {
                 setState(() {
-                  number = NumberRepository().getNumber();
+                  result = NumberRepository().getNumber();
                 });
               },
               child: const Text('Get Data'))
